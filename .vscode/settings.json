@@ -1,6 +1,6 @@
 {
-  "ocaml.sandbox": {
-    "kind": "opam",
-    "switch": "${workspaceFolder:melange-opam-template}"
-  }
+	"ocaml.sandbox": {
+		"kind": "opam",
+		"switch": "${workspaceFolder:country-select}"
+	}
 }
