@@ -22,14 +22,21 @@ module App = {
       Some(()=> ());
     });
 
-    <div>
+    <div 
+      style=(
+        ReactDOM.Style.make(~width="200px", ~fontSize="16px", ())
+      )>
       <h1>{React.string("Countries!")}</h1>
-      <ul>{countries
-            -> Belt.Array.map(({label, value}) =>
-                  <li>{React.string(label ++ ": " ++ value)}</li>
-                )
-            -> React.array}
-      </ul>
+      <Select 
+        options=countries
+        isSearchable=true
+        isClearable=true />
+      // <ul>{countries
+      //       -> Belt.Array.map(({label, value}) =>
+      //             <li>{React.string(label ++ ": " ++ value)}</li>
+      //           )
+      //       -> React.array}
+      // </ul>
     </div>;
   };
 };
