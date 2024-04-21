@@ -138,6 +138,7 @@ let make = (~country, ~onChange) => {
                         e
                         |> React.Event.Keyboard.key
                         |> (fun
+                            | "Escape"
                             | "Enter" => setIsOpen(_ => false)
                             | _ => ()
                         )
