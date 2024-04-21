@@ -2,41 +2,16 @@ let countryUrl = "https://gist.githubusercontent.com/rusty-key/659db3f4566df459b
 module App = {
   // This sample forces an import of Belt.*, so that CI builds can ensure that
   // Melange has been installed correctly for JS bundlers to be able to find it.
+  
+  
   [@react.component]
   let make = () => {
-    let (countries, setCountries) = React.useState(_ => [||]);
-    React.useEffect0(()=>{
-      let _ =
-        Js.Promise.(
-          Fetch.fetch(countryUrl)
-            |>then_(Fetch.Response.json)
-            |>then_(json =>
-              json
-              ->Js.Json.decodeArray
-              ->Belt.Option.getExn
-              ->Belt.Array.map(Country.decode)
-              ->resolve
-            ) 
-            |>then_(countries => setCountries(_ => countries) |> resolve)
-        )
-      Some(()=> ());
-    });
-
-    <div 
-      style=(
-        ReactDOM.Style.make(~width="200px", ~fontSize="16px", ())
-      )>
-      <h1>{React.string("Countries!")}</h1>
-      <Select 
-        options=countries
-        isSearchable=true
-        isClearable=true />
-      // <ul>{countries
-      //       -> Belt.Array.map(({label, value}) =>
-      //             <li>{React.string(label ++ ": " ++ value)}</li>
-      //           )
-      //       -> React.array}
-      // </ul>
+    let (country, setCountry) = React.useState(() => None);
+    <div>
+      <CountrySelect
+        country
+        onChange={country => setCountry(_ => country)}
+      />
     </div>;
   };
 };

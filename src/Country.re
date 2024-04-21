@@ -1,3 +1,4 @@
+[@deriving (jsProperties, getSet)]
 type t = {
     label: string,
     value: string
