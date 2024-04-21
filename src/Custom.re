@@ -34,7 +34,7 @@ module Option = {
 
     React.useEffect1(()=>{
          optionRef.current
-                -> Js.Nullable.toOption
+                |> Js.Nullable.toOption
                 |> Option.map(myRef => {
                     myRef |> IntersectionOberserver.observe(observerRef.current |> Option.get);
                     myRef
@@ -46,18 +46,18 @@ module Option = {
     React.useEffect2(()=> {
         isFocused 
         ?  optionRef.current
-        -> Js.Nullable.toOption
-                |> Option.map(myRef => {
-                    myRef -> ScrollIfNeeded.scrollIntoView(ScrollIfNeeded.options(
-                        ~scrollMode= "if-needed",
-                        ~block= "nearest",
-                        ~inline= "nearest",
-                        ~behavior= "smooth",
-                        ()
-                    ));
-                    myRef
-                })
-                |> ignore
+            |> Js.Nullable.toOption
+            |> Option.map(myRef => {
+                myRef -> ScrollIfNeeded.scrollIntoView(ScrollIfNeeded.options(
+                    ~scrollMode= "if-needed",
+                    ~block= "nearest",
+                    ~inline= "nearest",
+                    ~behavior= "smooth",
+                    ()
+                ));
+                myRef
+            })
+            |> ignore
         : ();
         Some(()=>());
     },(isFocused, optionRef));

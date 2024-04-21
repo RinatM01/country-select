@@ -49,12 +49,18 @@ let styleOverrides = Select.StyleOverrides.t(
             ),
     ()
 );
-let btn = make(~backgroundColor="white",
-                ~border="1px solid rgba(0,0,0,0.2)",
+let btn = (isFocused) => make(~backgroundColor="white",
+                ~border= isFocused ? "1px solid rgba(0,0,0,0.2)" : "1px solid rgba(0,0,0,0.1)",
                 ~padding="7px 9px",
                 ~borderRadius="3px",
                 ~cursor="pointer",
                 ~width="auto",
+                ~display="flex",
+                ~justifyContent="center",
+                ~alignItems="center",
+                ~color="black",
+                ~fontFamily="Arial",
+                ~fontSize="14px",
                 ());
 let label = make(~marginRight="7px",());
 let selectWrapper = (isOpen) => make(~width="230px",
@@ -68,6 +74,7 @@ let optionWrapper = (~isSelected, ~isFocused) => make(~display="flex",
                                                     ~justifyContent="space-between",
                                                     ~alignItems="center",
                                                     ~backgroundColor= isSelected ? "rgba(255, 219, 179, 1)" : isFocused ? "rgba(255, 219, 179, 0.5)" : "rgba(0,0,0,0)",
+                                                    ~cursor="pointer",
                                                     ());
 let flagLabel = make(~display="flex",~alignItems="center", ~fontSize="14px", ());
 let trafficLabel = make(~color="rgba(0,0,0,0.52)", ~fontSize="12px", ());

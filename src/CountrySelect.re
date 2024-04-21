@@ -1,22 +1,67 @@
 let countryUrl = "https://gist.githubusercontent.com/rusty-key/659db3f4566df459bd59c8a53dc9f71f/raw/4127f9550ef063121c564025f6d27dceeb279623/counties.json";
 
 module Dropdown = {
+    open Utils.DomManipulations;
     [@react.component]
-    let make = (~children, ~target, ~isOpen, ~setIsOpen) => {
+    let make = (~children, ~target, ~isOpen, ~setIsOpen, ~setIsFocused) => {
 
-        let handleEsacepe = (e) => {
+        let myRef = React.useRef(Js.Nullable.null);
+
+        let closeMenu = () => {
+            setIsOpen(_ => false);
+            setIsFocused(_=>false);
+        };
+        
+        React.useEffect0(()=>{
+            let handleMouseDown = (e) => {
+                let clickedObj = e |> React.Event.Keyboard.target;
+                
+                myRef.current
+                |> Js.Nullable.toOption
+                |> Option.map(myRef => {
+                    !(myRef -> contains(clickedObj)) ? closeMenu(()) : ();
+                    myRef
+                })
+                |> ignore;
+                
+            };
+            document -> addEventListener("mousedown",handleMouseDown);
+            Some(() => document -> removeEventListener("mousedown", handleMouseDown))
+        });
+
+        let handleKeydown = (e) => {
             e 
-            |> React.Event.Keyboard.key 
+            |> React.Event.Keyboard.key
+            //|> Js.log
             |> (fun
                 | "Escape" => setIsOpen(_ => false)
+                | " " => {
+                    e |> React.Event.Keyboard.stopPropagation;
+                    setIsFocused(isFocused => {
+                        setIsOpen(isOpen => !isOpen && isFocused);
+                        isFocused
+                    });
+                }
+                | "Enter" => setIsFocused(isFocused => {
+                    setIsOpen(isOpen => !isOpen && isFocused);
+                    isFocused
+                })
                 | _ => ()
             ); 
         };
+
+        React.useEffect0(()=> {
+            document -> addEventListener("keydown", handleKeydown);
+            Some(()=> document -> removeEventListener("keydown", handleKeydown))
+        });
+
         
-        <div>
+        
+        <div ref={myRef -> ReactDOM.Ref.domRef} >
         target
         {isOpen 
-            ? <div onKeyDown=handleEsacepe onBlur={_ => setIsOpen(_ => false)}> children </div>
+            ? <div 
+                > children </div>
             : React.null
         }
         
@@ -53,14 +98,23 @@ let make = (~country, ~onChange) => {
     };
 
     let countryLabel = String.length(countryLabel) > 0 ? countryLabel : "Choose Country";
+    let (isFocused, setIsFocused) = React.useState(_=>false);
     
 
     <div>
         <Dropdown
+            //isFocused
             isOpen
             setIsOpen
+            setIsFocused
             target={
-                <button style=Styles.btn onClick={_=>setIsOpen(isOpen => !isOpen)} >
+                <button 
+                    style=Styles.btn(isFocused) 
+                    onClick={_=>{
+                        setIsOpen(isOpen => !isOpen);
+                        setIsFocused(_ => true);
+                    }} 
+                >
                     <Icon.Flag countryValue=stringValue isVisible=true /> 
                     <span style=Styles.label>{countryLabel -> React.string} </span>
                     <Icon.ArrowDown/>
@@ -79,6 +133,15 @@ let make = (~country, ~onChange) => {
                     autoFocus=true
                     styles=Styles.styleOverrides
                     placeholder="Search"
+                    onKeyDown={e => {
+                        e |> React.Event.Keyboard.stopPropagation;
+                        e
+                        |> React.Event.Keyboard.key
+                        |> (fun
+                            | "Enter" => setIsOpen(_ => false)
+                            | _ => ()
+                        )
+                    }}
                     onChange={(option : Js.Nullable.t(Country.t) )=> {
                         option 
                             |> Js.Nullable.toOption

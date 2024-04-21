@@ -12,7 +12,26 @@ module IntersectionOberserver = {
     external make: (array(intersectionObserverEntry) => unit) => intersectionObserver = "IntersectionObserver";
     [@mel.send] external disconnect: intersectionObserver => unit = "disconnect";
     [@mel.send] external observe: (intersectionObserver, Dom.element) => unit = "observe";
+    
 }
+module DomManipulations = {
+    type document;
+    external document: document = "document";
+
+    //unfortunately I had set the second argument to be js object
+    //even though we know it must be Dom.element, because 
+    //React.Event.Keyboard.target returns js object
+    [@mel.send] 
+    external contains: (Dom.element, Js.t({..})) => bool = "contains";
+    [@mel.send]
+    external addEventListener: (document, string, (React.Event.Keyboard.t => unit)) 
+    => unit = "addEventListener";
+
+    [@mel.send]
+    external removeEventListener: (document, string, (React.Event.Keyboard.t => unit)) 
+    => unit = "removeEventListener";
+}
+
 
 module ScrollIfNeeded = {
     [@deriving jsProperties]
