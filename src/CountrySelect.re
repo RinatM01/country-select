@@ -13,6 +13,7 @@ module Dropdown = {
         };
         
         // this handles the isFocused state just like normal select does
+        // when our select is in focus the button will have slightly darker outline as an indicator
         React.useEffect0(()=>{
             let handleMouseDown = (e) => {
                 let clickedObj = e |> React.Event.Keyboard.target;
