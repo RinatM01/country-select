@@ -8,7 +8,7 @@ module Flag = {
                 | str when str |> String.length == 2 => Some("fi fi-" ++ str)
                 | _ => None
             };
-
+        //only renders when the value is valid and is visible by user
         switch (flagIcon) {
             | Some(classN) when isVisible => <span 
                                     style=Styles.flagIcon 

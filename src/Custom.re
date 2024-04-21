@@ -43,6 +43,7 @@ module Option = {
         Some(()=> observerRef.current |> Option.get |> IntersectionOberserver.disconnect);
     }, [|optionRef|]);
 
+    //this scrolls the window if next option is out of view
     React.useEffect2(()=> {
         isFocused 
         ?  optionRef.current

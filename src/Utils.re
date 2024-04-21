@@ -3,6 +3,7 @@ module Spread = {
   let make = (~props, ~children) => React.cloneElement(children, props);
 };
 
+//Bindings for intersectionobserver
 module IntersectionOberserver = {
     type intersectionObserverEntry;
     type intersectionObserver;
@@ -14,6 +15,8 @@ module IntersectionOberserver = {
     [@mel.send] external observe: (intersectionObserver, Dom.element) => unit = "observe";
     
 }
+
+//Bindings for some dom manipulation apis
 module DomManipulations = {
     type document;
     external document: document = "document";
@@ -32,7 +35,7 @@ module DomManipulations = {
     => unit = "removeEventListener";
 }
 
-
+//Bindings for scroll-into-view-if-needed npm package
 module ScrollIfNeeded = {
     [@deriving jsProperties]
     type options = {
@@ -47,7 +50,6 @@ module ScrollIfNeeded = {
     };
     [@mel.module "scroll-into-view-if-needed"]
     external scrollIntoView: (Dom.element, options) => unit = "default";
-
 }
 
 

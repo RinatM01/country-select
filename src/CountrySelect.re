@@ -12,6 +12,7 @@ module Dropdown = {
             setIsFocused(_=>false);
         };
         
+        // this handles the isFocused state just like normal select does
         React.useEffect0(()=>{
             let handleMouseDown = (e) => {
                 let clickedObj = e |> React.Event.Keyboard.target;
@@ -28,7 +29,7 @@ module Dropdown = {
             document -> addEventListener("mousedown",handleMouseDown);
             Some(() => document -> removeEventListener("mousedown", handleMouseDown))
         });
-
+        // event listener for keys that potentially open or close select menu
         let handleKeydown = (e) => {
             e 
             |> React.Event.Keyboard.key
@@ -103,7 +104,6 @@ let make = (~country, ~onChange) => {
 
     <div>
         <Dropdown
-            //isFocused
             isOpen
             setIsOpen
             setIsFocused
@@ -134,6 +134,7 @@ let make = (~country, ~onChange) => {
                     styles=Styles.styleOverrides
                     placeholder="Search"
                     onKeyDown={e => {
+                        //prevents from menu being open, cause the "Enter" can also be picked up by dropdown
                         e |> React.Event.Keyboard.stopPropagation;
                         e
                         |> React.Event.Keyboard.key
