@@ -1,11 +1,11 @@
 opam-version: "2.0"
-synopsis: "Melange project"
-description: "Minimal melange project"
-maintainer: ["<your_name>"]
-authors: ["<your_name>"]
+synopsis: "Country Select implementation using ReasonReact"
+description: "A web app that showcases component that let's you select countries from a given list."
+maintainer: ["Rinat Musin"]
+authors: ["Rinat Musin"]
 license: "MIT"
-homepage: "https://github.com/your/project"
-bug-reports: "https://github.com/your/project/issues"
+homepage: "https://github.com/RinatM01/country-select"
+bug-reports: "https://github.com/RinatM01/country-select/issues"
 depends: [
   "ocaml"
   "reason" {>= "3.10.0"}

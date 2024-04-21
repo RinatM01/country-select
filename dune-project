@@ -6,16 +6,16 @@
 
 (license "MIT")
 
-(maintainers <your_name>)
+(maintainers "Rinat Musin")
 
-(authors <your_name>)
+(authors "Rinat Musin")
 
-(homepage https://github.com/your/project)
+(homepage https://github.com/RinatM01/country-select)
 
-(bug_reports https://github.com/your/project/issues)
+(bug_reports https://github.com/RinatM01/country-select/issues)
 
 (package
  (allow_empty)
  (name melange-opam-template)
- (synopsis "Melange project")
- (description "Minimal melange project"))
+ (synopsis "Country Select implementation using ReasonReact")
+ (description "A web app that showcases component that let's you select countries from a given list."))
