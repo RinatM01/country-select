@@ -1,9 +1,9 @@
-# melange-opam-template
+# Country Select Component built with ReasonReact
 
-A simple project template using [Melange](https://github.com/melange-re/melange)
-with [opam](https://opam.ocaml.org/).
-
-If you are looking for a template with esy, check [melange-esy-template](https://github.com/melange-re/melange-esy-template).
+- ✅ Fetches country data during runtime
+- ✅ Keyboard Support
+- ✅ The component is focusable
+- ✅ Only renders visible options
 
 ## Quick Start
 
@@ -31,10 +31,10 @@ on each command in the `scriptsComments` field of the `package.json` file.
 Here are a few of the most useful ones:
 
 - `npm run init`: set up opam local switch and download OCaml, Melange and
-JavaScript dependencies
+  JavaScript dependencies
 - `npm run install-opam-npm`: install OCaml, Melange and JavaScript dependencies
 - `npm run watch`: watch for the filesystem and have Melange rebuild on every
-change
+  change
 - `npm run serve`: serve the application with a local HTTP server
 
 ## JavaScript output
@@ -46,6 +46,7 @@ The template includes two `melange.emit` stanza for two separate apps. This
 stanza tells Dune to generate JavaScript files using Melange, and specifies in
 which folder the JavaScript files should be placed, by leveraging the `target`
 field:
+
 - The React app JavaScript files will be placed in `_build/default/src/output/*`.
 - The NodeJS app JavaScript files will be placed in `_build/default/src/node/*`.
 
