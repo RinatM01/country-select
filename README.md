@@ -5,6 +5,8 @@
 - ✅ The component is focusable
 - ✅ Only renders visible options
 
+[Live Demo](https://github.com/RinatM01/country-select)
+
 ## Quick Start
 
 ```shell
