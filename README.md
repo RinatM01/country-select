@@ -5,7 +5,7 @@
 - ✅ The component is focusable
 - ✅ Only renders visible options
 
-[Live Demo](https://github.com/RinatM01/country-select)
+[Live Demo](https://rinatm01.github.io/country-select/)
 
 ## Quick Start
 
